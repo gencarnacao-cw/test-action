@@ -1,0 +1,16 @@
+# action.yml
+name: 'GitHub Action Peeker'
+description: 'Peek into the env passed to action'
+inputs:
+  some-var:  # id of input
+    description: 'A var to peek'
+    required: true
+    default: 'my-default'
+outputs:
+  out-var: # id of output
+    description: 'Some output var to peek'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.some-var }}
