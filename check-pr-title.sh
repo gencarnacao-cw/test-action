@@ -1,5 +1,3 @@
-#!/bin/sh -l
-
 PR_URL=$(echo $GITHUB_CONTEXT | jq -r ".event.pull_request.title")
 
 if [ -z "$PR_TITLE" ]; then
