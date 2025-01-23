@@ -2,15 +2,19 @@
 name: 'GitHub Action Peeker'
 description: 'Peek into the env passed to action'
 inputs:
-  some-var:  # id of input
-    description: 'A var to peek'
+  context:  # id of input
+    description: 'GitHub context'
     required: true
-    default: 'my-default'
+    default: $GITHUB_CONTEXT
 outputs:
-  out-var: # id of output
+  title: # id of output
     description: 'Some output var to peek'
+    value: ${{ steps.output-context.outputs.title}}
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.some-var }}
+  using: 'composite'
+  steps:
+    - name: output-context
+      run: |
+        $TITLE=$($INPUT_CONTEXT | jq -r ".event.pull_request.title")
+        echo "title=$TITLE" >> $GITHUB_OUTPUT
+      shell: bash
