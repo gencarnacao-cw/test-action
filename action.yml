@@ -4,6 +4,12 @@ description: 'Peek into the env passed to action'
 runs:
   using: 'composite'
   steps:
+    - name: list-folder-contents
+      run: ls
+      shell: bash
+    - name: find-script
+      run: find . | grep check-pr-title.sh
+      shell: bash
     - name: check-pr-title-for-jira-issue
       run: ./check-pr-title.sh
       shell: bash
