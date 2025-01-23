@@ -9,8 +9,12 @@ inputs:
 outputs:
   out-var: # id of output
     description: 'Some output var to peek'
+    value: ${{ steps.output-context.outputs.thing}}
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.some-var }}
+  using: 'composite'
+  steps:
+    - name: output-context
+      run: |
+        echo "$GITHUB_CONTEXT"
+        echo "thing=box" >> $GITHUB_OUTPUT
+      shell: bash
