@@ -5,6 +5,10 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+  github-context:
+    description: The context
+    required: true
+    default: ${{ github.context }}
 outputs:
   random-number:
     description: "Random number"
@@ -32,4 +36,6 @@ runs:
     - name: Run goodbye.sh
       run: goodbye.sh
       shell: bash
+      env:
+        GITHUB_CONTEXT: ${{ inputs.github-context }}
 
