@@ -8,7 +8,7 @@ runs:
   using: "composite"
   steps:
     - name: Print context
-      run: echo $CONTEXT"
+      run: echo "$CONTEXT"
       shell: bash
       env:
         CONTEXT: ${{ inputs.context }}
