@@ -5,7 +5,7 @@ runs:
   using: 'composite'
   steps:
     - name: sanity-check
-      run: ls -la
+      run: ls /home/ -laR
       shell: bash
     - name: check-pr-title-for-jira-issue
       run: check-pr-title.sh
