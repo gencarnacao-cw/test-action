@@ -1,20 +1,35 @@
-# action.yml
-name: 'GitHub Action Peeker'
-description: 'Peek into the env passed to action'
+name: 'Hello World'
+description: 'Greet someone'
 inputs:
-  context:  # id of input
-    description: 'GitHub context'
+  who-to-greet:  # id of input
+    description: 'Who to greet'
     required: true
-    default: $GITHUB_CONTEXT
+    default: 'World'
 outputs:
-  title: # id of output
-    description: 'Some output var to peek'
-    value: ${{ steps.output-context.outputs.title}}
+  random-number:
+    description: "Random number"
+    value: ${{ steps.random-number-generator.outputs.random-number }}
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - name: output-context
-      run: |
-        $TITLE=$($INPUT_CONTEXT | jq -r ".event.pull_request.title")
-        echo "title=$TITLE" >> $GITHUB_OUTPUT
+    - name: Set Greeting
+      run: echo "Hello $INPUT_WHO_TO_GREET."
       shell: bash
+      env:
+        INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+
+    - name: Random Number Generator
+      id: random-number-generator
+      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
+
+    - name: Run goodbye.sh
+      run: goodbye.sh
+      shell: bash
+
