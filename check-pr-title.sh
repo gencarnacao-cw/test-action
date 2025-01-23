@@ -1,4 +1,6 @@
-PR_URL=$(echo $GITHUB_CONTEXT | jq -r ".event.pull_request.title")
+echo $GITHUB_CONTEXT
+
+PR_TITLE=$(echo $GITHUB_CONTEXT | jq -r ".event.pull_request.title")
 
 if [ -z "$PR_TITLE" ]; then
     echo "Found Jira issue ID: $(echo $PR_TITLE | grep -o "GRUB-\d*")
