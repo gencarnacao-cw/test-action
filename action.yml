@@ -5,5 +5,5 @@ runs:
   using: 'composite'
   steps:
     - name: check-pr-title-for-jira-issue
-      run: check-pr-title.sh
+      run: ./check-pr-title.sh
       shell: bash
