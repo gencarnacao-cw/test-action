@@ -8,10 +8,10 @@ runs:
   using: "composite"
   steps:
     - name: Print context
-      run: echo "$CONTEXT"
+      run: echo "Title= $CONTEXT" | jq -r ".pull_request.title"
       shell: bash
       env:
-        CONTEXT: ${{ github.context }}
+        CONTEXT: ${{ inputs.context }}
 
     - name: Set GitHub Path
       run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
