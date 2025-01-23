@@ -1,20 +1,9 @@
 # action.yml
 name: 'GitHub Action Peeker'
 description: 'Peek into the env passed to action'
-inputs:
-  some-var:  # id of input
-    description: 'A var to peek'
-    required: true
-    default: 'my-default'
-outputs:
-  out-var: # id of output
-    description: 'Some output var to peek'
-    value: ${{ steps.output-context.outputs.thing}}
 runs:
   using: 'composite'
   steps:
-    - name: output-context
-      run: |
-        echo "$GITHUB_CONTEXT"
-        echo "thing=box" >> $GITHUB_OUTPUT
+    - name: check-pr-title-for-jira-issue
+      run: check-pr-title.sh
       shell: bash
