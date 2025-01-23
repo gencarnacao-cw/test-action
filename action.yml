@@ -11,7 +11,13 @@ runs:
       run: echo "$CONTEXT"
       shell: bash
       env:
-        CONTEXT: ${{ inputs.context }}
+        CONTEXT: ${{ github.context }}
+
+    - name: Set GitHub Path
+      run: echo "$GITHUB_ACTION_PATH" >> $GITHUB_PATH
+      shell: bash
+      env:
+        GITHUB_ACTION_PATH: ${{ github.action_path }}
 
     - name: Run goodbye.sh
       run: goodbye.sh
