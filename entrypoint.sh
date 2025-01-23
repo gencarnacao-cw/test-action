@@ -8,3 +8,5 @@ ls ${GITHUB_STATE}
 cat ${GITHUB_STATE}
 time=$(date)
 echo "out-var=$time" >> $GITHUB_OUTPUT
+echo "::error::This didnt work"
+exit 1
